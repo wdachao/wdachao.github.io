@@ -61,7 +61,12 @@
     $('#download-link').href = product.url;
     $('#download-link-label').textContent = product.windows ? '设备版 · 蒲公英下载' : '前往蒲公英下载';
     $('#windows-download').hidden = !product.windows;
-    if (product.windows) $('#windows-download-link').href = product.windows.url;
+    if (product.windows) {
+      $('#windows-download-link').href = product.windows.url;
+      $('#windows-package-size').textContent = '.exe · ' + (product.windows.sizeBytes / (1024 * 1024)).toFixed(1) + ' MiB';
+      $('#windows-package-bytes').textContent = product.windows.sizeBytes.toLocaleString('zh-CN');
+      $('#windows-package-sha256').textContent = product.windows.sha256;
+    }
   }));
 
   // These local, labelled illustrations demonstrate the product's interaction.
