@@ -35,7 +35,7 @@
     $('#qr-dialog-title').textContent = product.name;
     $('#qr-dialog-scene').textContent = product.scene;
     $('#qr-dialog-image').src = './assets/' + id + '-qr.png';
-    $('#qr-dialog-image').alt = product.name + '蒲公英下载二维码';
+    $('#qr-dialog-image').alt = product.name + '下载二维码';
     $('#qr-dialog-link').href = product.url;
     dialog.showModal();
     document.body.classList.add('modal-open');
@@ -57,9 +57,9 @@
     $('#download-scene').textContent = product.scene;
     $('#download-icon').src = './assets/' + product.id + '-icon.webp';
     $('#download-qr').src = './assets/' + product.id + '-qr.png';
-    $('#download-qr').alt = product.name + '蒲公英下载二维码';
+    $('#download-qr').alt = product.name + '下载二维码';
     $('#download-link').href = product.url;
-    $('#download-link-label').textContent = product.windows ? '设备版 · 蒲公英下载' : '前往蒲公英下载';
+    $('#download-link-label').textContent = '前往下载';
     $('#windows-download').hidden = !product.windows;
     if (product.windows) {
       $('#windows-download-link').href = product.windows.url;

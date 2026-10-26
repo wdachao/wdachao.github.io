@@ -55,7 +55,7 @@ img { max-width: 100%; object-fit: contain; }
 .hero-copy { position: relative; z-index: 2; }
 .eyebrow { display: flex; align-items: center; gap: 11px; font-size: 12px; font-weight: 650; letter-spacing: 1.8px; color: #677996; }
 .eyebrow>i { width: 7px; height: 7px; background: var(--orange); border-radius: 50%; box-shadow: 0 0 0 5px #ff6b2412; }
-.hero-copy h1 { font-size: clamp(62px,5.6vw,88px); font-weight: 800; line-height: 1.21; letter-spacing: -4px; margin: 29px 0 32px; }
+.hero-copy h2 { font-size: clamp(62px,5.6vw,88px); font-weight: 800; line-height: 1.21; letter-spacing: -4px; margin: 29px 0 32px; }
 .hero-emphasis { color: var(--orange); position: relative; white-space: nowrap; }
 .hero-emphasis>svg { position: absolute; left: 0; bottom: -12px; width: 100%; height: 18px; fill: none; stroke: #ffac72; stroke-width: 3; stroke-linecap: round; }
 .hero-copy>p { font-size: 18px; line-height: 1.95; color: #6b7890; }
@@ -232,7 +232,7 @@ img { max-width: 100%; object-fit: contain; }
 .download-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 480px; gap: 90px; align-items: center; padding-block: 96px; }
 .download-heading .eyebrow { font-size: 11px; color: #8daede; }
 .download-heading .eyebrow>i { background: #ff985b; box-shadow: 0 0 0 5px #ff985b14; }
-.download-heading h2 { font-size: 58px; font-weight: 750; line-height: 1.3; letter-spacing: -1.5px; color: white; margin: 24px 0; }
+.download-heading h1 { font-size: 58px; font-weight: 750; line-height: 1.3; letter-spacing: -1.5px; color: white; margin: 24px 0; }
 .download-heading>p { color: #9db2d3; font-size: 15px; line-height: 1.9; }
 .download-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; margin-top: 34px; }
 .download-tab { --tab-accent: #ff7b35; display: flex; align-items: center; gap: 12px; padding: 17px; min-height: 62px; border: 1px solid #ffffff22; background: #ffffff05; color: #adc3e6; border-radius: 11px; text-align: left; font-size: 14px; transition: background .2s,border-color .2s; }
@@ -249,7 +249,7 @@ img { max-width: 100%; object-fit: contain; }
 .download-card-top img { width: 46px; height: 46px; border-radius: 12px; }
 .download-card-top h3 { font-size: 17px; font-weight: 650; color: #243f67; }
 .download-card-top>div>span { color: #92a2b9; font-size: 10px; }
-.pgyer-badge { margin-left: auto; align-self: flex-start; border: 1px solid #dce6f5; background: #f3f7fe; padding: 4px 8px; border-radius: 20px; color: #819ac0; font-size: 9px; white-space: nowrap; }
+.distribution-badge { margin-left: auto; align-self: flex-start; border: 1px solid #dce6f5; background: #f3f7fe; padding: 4px 8px; border-radius: 20px; color: #819ac0; font-size: 9px; white-space: nowrap; }
 .qr-frame { position: relative; width: 238px; height: 238px; margin: 32px auto 0; display: grid; place-items: center; border: 1px solid #e1e8f4; border-radius: 16px; padding: 17px; background: #fff; }
 .qr-frame:before,.qr-frame:after { content: ''; position: absolute; width: 22px; height: 22px; border-color: var(--orange); border-style: solid; }
 .qr-frame:before { left: -1px; top: -1px; border-width: 3px 0 0 3px; border-radius: 14px 0 0; }
@@ -285,7 +285,7 @@ body.modal-open { overflow: hidden; }
 /* Wide desktops keep a contained, balanced composition. */
 @media (min-width: 1600px) {
   .hero-inner { min-height: 775px; }
-  .hero-copy h1 { font-size: 88px; }
+  .hero-copy h2 { font-size: 88px; }
   .hero-scale { left: 53px; top: 132px; transform: rotate(-5deg) scale(1.13); }
   .hero-visual { height: 550px; }
 }
@@ -299,7 +299,7 @@ body.modal-open { overflow: hidden; }
   .brand strong { font-size: 24px; }
   .header-download { padding-inline: 18px; gap: 14px; }
   .hero-inner { min-height: 665px; padding-block: 67px; }
-  .hero-copy h1 { font-size: 65px; letter-spacing: -3px; }
+  .hero-copy h2 { font-size: 65px; letter-spacing: -3px; }
   .hero-copy>p { font-size: 16px; }
   .hero-copy .eyebrow { font-size: 10px; letter-spacing: 1.3px; }
   .hero-actions { gap: 22px; }
@@ -347,13 +347,13 @@ body.modal-open { overflow: hidden; }
   .product-number { font-size: 112px; }
   .preview-caption { left: 26px; right: 26px; font-size: 8px; letter-spacing: 1px; }
   .download-inner { grid-template-columns: 1fr 430px; gap: 48px; }
-  .download-heading h2 { font-size: 51px; }
+  .download-heading h1 { font-size: 51px; }
   .download-heading>p { font-size: 13px; }
   .download-tab { padding: 15px 12px; font-size: 13px; gap: 9px; }
   .download-card { padding: 29px; }
   .download-card-top h3 { font-size: 15px; }
   .download-card-top>div>span { font-size: 9px; }
-  .pgyer-badge { padding: 3px 6px; font-size: 8px; }
+  .distribution-badge { padding: 3px 6px; font-size: 8px; }
   .site-footer>small { width: 100%; margin-top: 4px; text-align: center; }
 }
 
@@ -366,7 +366,7 @@ body.modal-open { overflow: hidden; }
   .header-download { margin-left: auto; }
   .menu-toggle { display: grid; place-items: center; }
   .hero-inner { display: flex; flex-direction: column; align-items: stretch; padding-top: 62px; padding-bottom: 40px; }
-  .hero-copy h1 { font-size: clamp(58px,8.5vw,78px); }
+  .hero-copy h2 { font-size: clamp(58px,8.5vw,78px); }
   .hero-copy>p { font-size: 18px; }
   .hero-actions .text-link { font-size: 15px; }
   .hero-copy .eyebrow { font-size: 12px; }
@@ -393,7 +393,7 @@ body.modal-open { overflow: hidden; }
   .section-heading .eyebrow { font-size: 9px; }
   .section-heading>p { font-size: 12px; }
   .download-inner { grid-template-columns: 1fr 360px; gap: 30px; }
-  .download-heading h2 { font-size: 44px; }
+  .download-heading h1 { font-size: 44px; }
   .download-heading .eyebrow { font-size: 9px; letter-spacing: 1px; }
   .download-heading>p { font-size: 13px; }
   .download-tab { font-size: 12px; padding: 14px 11px; gap: 7px; }
@@ -403,7 +403,7 @@ body.modal-open { overflow: hidden; }
   .download-card-top { gap: 10px; }
   .download-card-top img { width: 39px; height: 39px; }
   .download-card-top h3 { font-size: 14px; }
-  .pgyer-badge { font-size: 7px; padding: 3px 5px; }
+  .distribution-badge { font-size: 7px; padding: 3px 5px; }
 }
 
 /* Stacked showcases avoid crowded copy on tablets. */
@@ -458,7 +458,7 @@ body.modal-open { overflow: hidden; }
   .mobile-menu { padding: 10px 25px 20px; }
   .hero-inner { padding-top: 47px; padding-bottom: 25px; }
   .hero-copy .eyebrow { font-size: 10px; letter-spacing: 1.3px; }
-  .hero-copy h1 { font-size: clamp(44px,11.5vw,66px); letter-spacing: -2.5px; line-height: 1.24; margin: 24px 0 28px; }
+  .hero-copy h2 { font-size: clamp(44px,11.5vw,66px); letter-spacing: -2.5px; line-height: 1.24; margin: 24px 0 28px; }
   .hero-emphasis>svg { bottom: -11px; height: 15px; }
   .hero-copy>p { font-size: 15px; line-height: 1.9; }
   .hero-actions { margin-top: 28px; gap: 22px; }
@@ -529,7 +529,7 @@ body.modal-open { overflow: hidden; }
   .everyday-star { right: 0; top: 110px; font-size: 35px; }
   .download-inner { display: grid; grid-template-columns: 1fr; padding-block: 53px; gap: 34px; }
   .download-heading .eyebrow { font-size: 9px; letter-spacing: 1px; }
-  .download-heading h2 { font-size: 43px; line-height: 1.35; letter-spacing: -1px; margin: 21px 0; }
+  .download-heading h1 { font-size: 43px; line-height: 1.35; letter-spacing: -1px; margin: 21px 0; }
   .download-heading>p { font-size: 14px; line-height: 1.9; }
   .download-tabs { gap: 11px; margin-top: 27px; }
   .download-tab { min-height: 59px; padding: 14px 12px; font-size: 13px; gap: 9px; }
@@ -540,7 +540,7 @@ body.modal-open { overflow: hidden; }
   .download-card-top img { width: 40px; height: 40px; }
   .download-card-top h3 { font-size: 15px; }
   .download-card-top>div>span { font-size: 8px; }
-  .pgyer-badge { padding: 3px 5px; font-size: 7px; }
+  .distribution-badge { padding: 3px 5px; font-size: 7px; }
   .qr-frame { margin-top: 28px; }
   .scan-caption { font-size: 11px; }
   .download-card>.button { min-height: 51px; font-size: 14px; }
@@ -564,7 +564,7 @@ body.modal-open { overflow: hidden; }
   .header-inner { gap: 9px; }
   .header-download { font-size: 11px; padding-inline: 10px; gap: 8px; }
   .brand strong { font-size: 20px; }
-  .hero-copy h1 { font-size: clamp(40px,11.5vw,45px); letter-spacing: -2px; }
+  .hero-copy h2 { font-size: clamp(40px,11.5vw,45px); letter-spacing: -2px; }
   .hero-copy>p { font-size: 14px; }
   .hero-actions { gap: 17px; }
   .hero-actions .button { gap: 22px; padding-inline: 18px; }
@@ -599,7 +599,7 @@ body.modal-open { overflow: hidden; }
   .everyday>p { font-size: 22px; }
   .everyday-doodle .icon { width: 28px; height: 28px; }
   .everyday-star { font-size: 28px; }
-  .download-heading h2 { font-size: 39px; }
+  .download-heading h1 { font-size: 39px; }
   .download-heading>p { font-size: 13px; }
   .download-tabs { gap: 9px; }
   .download-tab { font-size: 12px; padding-inline: 11px; gap: 7px; }
@@ -608,7 +608,7 @@ body.modal-open { overflow: hidden; }
   .download-card-top img { width: 35px; height: 35px; }
   .download-card-top h3 { font-size: 14px; }
   .download-card-top>div>span { font-size: 7px; }
-  .pgyer-badge { font-size: 6px; }
+  .distribution-badge { font-size: 6px; }
   .qr-frame { width: 224px; height: 224px; padding: 15px; }
   .qr-frame img { width: 192px; height: 192px; }
   .download-hint { font-size: 8px; }
@@ -663,4 +663,42 @@ body.modal-open { overflow: hidden; }
   .windows-package-note { font-size: 11px; margin-top: 13px; }
   .windows-download-heading { font-size: 13px; }
   .windows-download-heading small { font-size: 10px; }
+}
+
+/* Download-first landing page and the supplied company logo. */
+.brand-mark { overflow: hidden; background: #fff; border: 1px solid #e2e9ed; box-shadow: 0 4px 14px #173e7210; border-radius: 13px; }
+.brand-mark img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.downloads { scroll-margin-top: 0; }
+.downloads .download-inner { padding-block: 38px 44px; min-height: min(760px, calc(100svh - 94px)); }
+.download-heading h1 { font-size: clamp(48px, 4.4vw, 66px); line-height: 1.24; letter-spacing: -2px; margin-block: 22px 24px; }
+.download-heading>p { color: #b4c8e7; }
+.download-explore { display: inline-flex; align-items: center; gap: 12px; margin-top: 24px; min-height: 36px; color: #b4c8e7; font-size: 13px; }
+.download-explore:hover { color: #fff; }
+.download-explore .icon { width: 17px; height: 17px; transform: rotate(90deg); }
+.download-card { padding: 24px 28px; }
+.download-card-top>div>span { font-size: 11px; }
+.download-card .qr-frame { width: 188px; height: 188px; padding: 13px; margin-top: 20px; }
+.download-card .qr-frame img { width: 160px; height: 160px; }
+.download-card .scan-caption { margin-block: 13px 18px; }
+@media (min-width: 961px) {
+  .downloads .download-inner { grid-template-columns: minmax(0,1fr) 430px; gap: 88px; }
+}
+@media (max-width: 960px) {
+  .download-heading h1 { font-size: 44px; }
+}
+@media (max-width: 640px) {
+  .downloads .download-inner { padding-block: 36px 44px; min-height: auto; gap: 26px; }
+  .download-heading h1 { font-size: 42px; letter-spacing: -1px; margin-block: 17px 19px; }
+  .download-heading>p { font-size: 13px; }
+  .download-heading .download-tabs { margin-top: 24px; }
+  .download-explore { margin-top: 15px; font-size: 12px; }
+  .download-card { padding: 24px; }
+  .download-card .qr-frame { width: 208px; height: 208px; padding: 13px; margin-top: 24px; }
+  .download-card .qr-frame img { width: 180px; height: 180px; }
+  .download-card-top>div>span { font-size: 10px; }
+}
+@media (max-width: 360px) {
+  .download-heading h1 { font-size: 37px; }
+  .download-card { padding-inline: 18px; }
+  .download-card-top>div>span { font-size: 9px; }
 }
