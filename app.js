@@ -49,6 +49,60 @@
     if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) dialog.close();
   });
 
+  const windowsDialog = document.createElement('dialog');
+  windowsDialog.className = 'windows-confirm-dialog';
+  windowsDialog.setAttribute('aria-labelledby', 'windows-confirm-title');
+  windowsDialog.innerHTML = '<button type="button" class="dialog-close" data-windows-close aria-label="关闭下载确认"><svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg></button>' +
+    '<span class="windows-confirm-eyebrow">WINDOWS · 芒音称重收银</span>' +
+    '<h2 id="windows-confirm-title">确认下载 Windows 安装包</h2>' +
+    '<p>安装程序将从芒音称重下载到本机。</p>' +
+    '<div class="windows-confirm-file"><svg class="icon" aria-hidden="true"><use href="#i-windows"></use></svg><span><strong data-windows-filename></strong><small>Windows 安装程序</small></span></div>' +
+    '<div class="windows-confirm-actions"><button type="button" class="windows-confirm-cancel" data-windows-cancel>取消</button><button type="button" class="windows-confirm-submit" data-windows-confirm>确认下载</button></div>';
+  document.body.append(windowsDialog);
+
+  let pendingWindowsDownload = null;
+  const closeWindowsDialog = () => windowsDialog.close();
+  windowsDialog.querySelector('[data-windows-close]').addEventListener('click', closeWindowsDialog);
+  windowsDialog.querySelector('[data-windows-cancel]').addEventListener('click', closeWindowsDialog);
+  windowsDialog.addEventListener('close', () => {
+    document.body.classList.remove('modal-open');
+    pendingWindowsDownload = null;
+  });
+  windowsDialog.addEventListener('click', event => {
+    if (event.target !== windowsDialog) return;
+    const box = windowsDialog.getBoundingClientRect();
+    if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) closeWindowsDialog();
+  });
+  document.addEventListener('click', event => {
+    const anchor = event.target.closest('a.windows-direct');
+    if (!anchor) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    if (windowsDialog.open) return;
+    pendingWindowsDownload = { url: anchor.href, filename: anchor.download || 'Mangyin_Scale_Setup.exe' };
+    windowsDialog.querySelector('[data-windows-filename]').textContent = pendingWindowsDownload.filename;
+    if (typeof windowsDialog.showModal !== 'function') {
+      window.open(pendingWindowsDownload.url, '_blank', 'noopener,noreferrer');
+      pendingWindowsDownload = null;
+      return;
+    }
+    windowsDialog.showModal();
+    document.body.classList.add('modal-open');
+  }, true);
+  windowsDialog.querySelector('[data-windows-confirm]').addEventListener('click', () => {
+    if (!pendingWindowsDownload) return;
+    const file = pendingWindowsDownload;
+    closeWindowsDialog();
+    const download = document.createElement('a');
+    download.href = file.url;
+    download.download = file.filename;
+    download.target = '_blank';
+    download.rel = 'noopener';
+    document.body.append(download);
+    download.click();
+    download.remove();
+  });
+
   $$('[data-download]').forEach(button => button.addEventListener('click', () => {
     const product = getProduct(button.dataset.download);
     if (!product) return;
@@ -63,8 +117,6 @@
     $('#windows-download').hidden = !product.windows;
     if (product.windows) {
       $('#windows-download-link').href = product.windows.url;
-      $('#windows-package-size').textContent = '.exe · ' + (product.windows.sizeBytes / (1024 * 1024)).toFixed(1) + ' MiB';
-      $('#windows-package-bytes').textContent = product.windows.sizeBytes.toLocaleString('zh-CN');
       $('#windows-package-sha256').textContent = product.windows.sha256;
     }
   }));

@@ -644,25 +644,39 @@ body.modal-open { overflow: hidden; }
 .weighing-download-actions { gap: 14px 20px; }
 .device-download { display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 650; color: #93451e; }
 .device-download:hover { color: #d85315; }
-.windows-package-note { margin: 12px 0 0; font-size: 12px; color: #9b674b; }
 .windows-download { margin-top: 22px; padding-top: 20px; border-top: 1px solid #e8edf3; text-align: left; }
 .windows-download[hidden] { display: none; }
 .windows-download-heading { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 12px; color: #253851; font-size: 14px; font-weight: 700; }
 .windows-download-heading>span { display: inline-flex; gap: 8px; align-items: center; }
-.windows-download-heading small { font-size: 11px; font-weight: 500; color: #7e8b9c; }
 .button-windows { width: 100%; min-height: 52px; background: #ed6b27; color: white; justify-content: center; }
 .button-windows:hover { background: #d95b1b; transform: translateY(-2px); }
 .download-integrity { margin-top: 13px; color: #8894a5; font-size: 11px; }
 .download-integrity summary { cursor: pointer; text-align: center; }
 .download-integrity p { margin: 12px 0 8px; line-height: 1.8; color: #66758a; }
 .download-integrity code { display: block; overflow-wrap: anywhere; font-size: 10px; line-height: 1.7; margin-top: 4px; user-select: all; }
+.windows-confirm-dialog { position: fixed; inset: 0; margin: auto; width: min(440px, calc(100% - 32px)); border: 1px solid #e2eaf7; border-radius: 18px; padding: 42px 30px 26px; background: #fff; color: var(--ink); box-shadow: 0 30px 100px #06183d40; }
+.windows-confirm-dialog::backdrop { background: #081c40a6; backdrop-filter: blur(7px); }
+.windows-confirm-dialog .dialog-close { position: absolute; right: 12px; top: 12px; }
+.windows-confirm-eyebrow { color: #9b674b; font-size: 11px; font-weight: 700; }
+.windows-confirm-dialog h2 { margin: 13px 0 8px; font-size: 22px; line-height: 1.4; }
+.windows-confirm-dialog>p { margin: 0; color: #72819a; font-size: 13px; line-height: 1.7; }
+.windows-confirm-file { display: flex; align-items: center; gap: 12px; margin: 22px 0; padding: 15px; border: 1px solid #e4eaf5; border-radius: 10px; background: #f7f9fc; }
+.windows-confirm-file>.icon { width: 24px; height: 24px; color: #ed6b27; flex: 0 0 auto; }
+.windows-confirm-file>span { display: grid; gap: 4px; min-width: 0; }
+.windows-confirm-file strong { overflow-wrap: anywhere; font-size: 13px; }
+.windows-confirm-file small { color: #7e8b9c; font-size: 11px; }
+.windows-confirm-actions { display: flex; justify-content: flex-end; gap: 10px; }
+.windows-confirm-actions button { min-height: 42px; border: 1px solid #e1e7f0; border-radius: 8px; padding: 0 17px; font: inherit; font-size: 13px; cursor: pointer; }
+.windows-confirm-cancel { color: #50627c; background: #fff; }
+.windows-confirm-submit { border-color: #ed6b27 !important; color: #fff; background: #ed6b27; font-weight: 650 !important; }
+.windows-confirm-submit:hover { background: #d95b1b; }
 @media (max-width: 600px) {
   .weighing-download-actions { gap: 13px 18px; }
   .weighing-download-actions .windows-direct { flex-basis: 100%; justify-content: center; }
   .weighing-download-actions .device-download, .weighing-download-actions .qr-button { font-size: 13px; }
-  .windows-package-note { font-size: 11px; margin-top: 13px; }
   .windows-download-heading { font-size: 13px; }
-  .windows-download-heading small { font-size: 10px; }
+  .windows-confirm-dialog { padding: 42px 22px 22px; }
+  .windows-confirm-dialog h2 { font-size: 20px; }
 }
 
 /* Download-first landing page and the supplied company logo. */

@@ -10,42 +10,28 @@
 
 ## 本地预览
 
-在项目根目录运行：
+在网站文件根目录运行：
 
-    python3 -m http.server 4173 --directory html
+    python3 -m http.server 4173
 
 访问 http://localhost:4173 。
 
 ## 发布到 GitHub Pages
 
-### 方式一：在当前 Flutter 仓库发布
+官网文件由 `wdachao/wdachao.github.io` 仓库的 `main` 分支根目录发布。网页文件提交并推送到 `main` 后会自动更新 GitHub Pages。保留根目录中的 `CNAME` 和域名验证文件。
 
-项目根目录已加入 .github/workflows/website-pages.yml，**只上传 html 目录**。
-
-1. 将 html 目录和这个 workflow 文件一起提交并推送到 main 分支。
-2. 打开 GitHub 仓库 **Settings → Pages → Build and deployment → Source**，选择 **GitHub Actions**。
-3. 在 **Actions → Deploy Mangyin website to Pages → Run workflow** 手动运行一次；以后 main 分支的网站变更会自动部署。
-4. 部署成功后，在 Pages 设置或 workflow 的 deployment 环境中查看网站地址。
-
-如果默认分支不是 main，请修改 workflow 的 branches。
-
-### 方式二：独立网站仓库
-
-将 html 文件夹内的全部文件上传到新仓库的**根目录**（保留 .nojekyll）。在 **Settings → Pages** 选择 **Deploy from a branch → main → / (root)**，保存即可。此方式无需复制根项目的 workflow。
-
-资源全部使用相对路径，同时支持 username.github.io 和 username.github.io/repository/，无需配置 base URL。
+资源使用相对路径，安装包由 OSS 提供，不放入 GitHub 仓库。
 
 ## Windows 称重版
 
 称重产品区域与下载中心提供独立的 Windows 下载入口；切换到其他产品时，下载中心自动隐藏 Windows 区域，避免下载错版。设备版继续使用原蒲公英二维码与链接。
 
 - 文件：Mangyin_Scale_Setup.exe
-- 文件大小：72,889,146 字节（69.5 MiB）
-- SHA-256：b8733688c6095ce7a76353ecb19d573a1a4809fde3f50632dc276c37e7a63ec3
-- 安装包通过独立 GitHub Release 附件分发，无需存入网站源码目录。
-- Windows 链接同时保留在 index.html 中，关闭 JavaScript 也可以下载；products.js 记录安装包元数据。
+- SHA-256：8507263bcd1e3332e62c7ce44d1c2ca3cb78251329693557f951186b1df85d77
+- 安装包通过 OSS 对象 `download/Mangyin_Scale_Setup.exe` 分发，不存入网站源码目录。
+- 页面不展示安装包体积；Windows 下载按钮打开确认弹窗后跳转到 OSS。
 
-更新安装包时，发布新的 Release 附件，并同步更新 products.js 与 index.html 的链接、大小和校验值。
+更新安装包时，上传到 OSS 并同步更新 `index.html`、`products.js` 中的链接和校验值。
 
 ## 下载地址
 

@@ -7,10 +7,9 @@ window.MANGYIN_PRODUCTS = [
     "url": "https://www.pgyer.com/mangyincheng",
     "scene": "生鲜 · 水果 · 散装零售",
     "windows": {
-      "url": "https://github.com/wdachao/wdachao.github.io/releases/latest/download/Mangyin_Scale_Setup.exe",
+      "url": "https://mangyin-cash-weighing-2026.oss-cn-hangzhou.aliyuncs.com/download/Mangyin_Scale_Setup.exe",
       "filename": "Mangyin_Scale_Setup.exe",
-      "sizeBytes": 72889146,
-      "sha256": "b8733688c6095ce7a76353ecb19d573a1a4809fde3f50632dc276c37e7a63ec3"
+      "sha256": "8507263bcd1e3332e62c7ce44d1c2ca3cb78251329693557f951186b1df85d77"
     }
   },
   {
