@@ -22,7 +22,9 @@
 
 OSS 静态网站默认首页为 `index.html`。将本站的 `index.html`、`app.js`、`products.js`、`styles.css`、`device-previews.css` 与 `assets/` 按原目录上传至 Bucket 根目录；不要上传 `README.md`、GitHub 的 `CNAME` 或 Git 目录。网页文件使用正确的 MIME 类型，不设置 `Content-Disposition: attachment`；EXE 则保留附件下载行为。更新页面时保留 `download/Mangyin_Scale_Setup.exe`。
 
-阿里云 DNS 中，`www` 的 CNAME 应指向 `mangyin-cash-weighing-2026.oss-cn-hangzhou.aliyuncs.com`，并在 OSS 中绑定同一自定义域名、托管相应 HTTPS 证书。GitHub 域名所有权 TXT 记录可以保留。
+阿里云 DNS 中，`www` 与根域名 `@` 的 CNAME 均指向 `mangyin-cash-weighing-2026.oss-cn-hangzhou.aliyuncs.com`；OSS 同时绑定 `www.mydcep.top` 和 `mydcep.top`，因此不带 www 的地址也能访问。GitHub 域名所有权 TXT 记录可以保留。
+
+HTTPS 使用免费的 Let's Encrypt RSA 证书，由阿里云数字证书管理服务托管并部署至 OSS 的两个域名。当前证书有效期至 **2027-02-10**，首次采用手动 HTTP 校验，**未配置自动续期**；请在到期前重新签发并更新阿里云及 OSS 证书。证书及私钥保存在本机 `/Users/zhoubing/.codex/mydcep-ssl/config/`，不得提交 Git 或上传至公开 Bucket。
 
 ## 保留旧 GitHub Pages 站点
 
