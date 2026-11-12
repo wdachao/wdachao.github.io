@@ -16,9 +16,17 @@
 
 访问 http://localhost:4173 。
 
-## 发布到 GitHub Pages
+## 正式官网与发布
 
-官网文件由 `wdachao/wdachao.github.io` 仓库的 `main` 分支根目录发布。网页文件提交并推送到 `main` 后会自动更新 GitHub Pages。保留根目录中的 `CNAME` 和域名验证文件。
+正式官网使用 `https://www.mydcep.top/`，网站及 Windows 安装包均由阿里云杭州 OSS Bucket `mangyin-cash-weighing-2026` 托管。首页备案号为 `浙ICP备2022006025号-12`，链接到工信部备案查询网站。
+
+OSS 静态网站默认首页为 `index.html`。将本站的 `index.html`、`app.js`、`products.js`、`styles.css`、`device-previews.css` 与 `assets/` 按原目录上传至 Bucket 根目录；不要上传 `README.md`、GitHub 的 `CNAME` 或 Git 目录。网页文件使用正确的 MIME 类型，不设置 `Content-Disposition: attachment`；EXE 则保留附件下载行为。更新页面时保留 `download/Mangyin_Scale_Setup.exe`。
+
+阿里云 DNS 中，`www` 的 CNAME 应指向 `mangyin-cash-weighing-2026.oss-cn-hangzhou.aliyuncs.com`，并在 OSS 中绑定同一自定义域名、托管相应 HTTPS 证书。GitHub 域名所有权 TXT 记录可以保留。
+
+## 保留旧 GitHub Pages 站点
+
+旧官网 `https://awnin.top/` 由 `wdachao/wdachao.github.io` 仓库的 `main` 分支根目录发布，并继续保留。GitHub 同时用于网站源码版本管理。提交网站文件时保留远端根目录中的 `CNAME`（值为 `awnin.top`）和域名验证文件，不要将它改成新域名。OSS 发布与 GitHub Pages 发布是两次独立操作，更新公共页面时需同步发布。
 
 资源使用相对路径，安装包由 OSS 提供，不放入 GitHub 仓库。
 

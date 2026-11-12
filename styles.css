@@ -266,6 +266,8 @@ img { max-width: 100%; object-fit: contain; }
 .site-footer>span { padding-left: 25px; border-left: 1px solid var(--line); color: #8190a8; font-size: 13px; }
 .back-top { margin-left: auto; color: #6881a5; font-size: 12px; }
 .site-footer>small { margin-left: auto; font-size: 11px; color: #98a5ba; }
+.site-registration { display: block; margin-top: 9px; }
+.site-registration:hover { color: var(--ink); text-decoration: underline; }
 
 /* Accessible QR dialog. Native dialog manages focus and Escape. */
 .qr-dialog { border: 1px solid #e2eaf7; background: white; color: var(--ink); width: 420px; max-width: calc(100% - 32px); border-radius: 24px; padding: 48px 35px 32px; text-align: center; box-shadow: 0 30px 100px #06183d40; }
