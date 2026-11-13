@@ -1,4 +1,4 @@
-/* Public destinations decoded from the supplied QR codes. */
+/* Public product and published Android release data. */
 window.MANGYIN_PRODUCTS = [
   {
     "id": "weighing",
@@ -7,9 +7,15 @@ window.MANGYIN_PRODUCTS = [
     "url": "https://www.pgyer.com/mangyincheng",
     "scene": "生鲜 · 水果 · 散装零售",
     "windows": {
-      "url": "https://mangyin-cash-weighing-2026.oss-cn-hangzhou.aliyuncs.com/download/Mangyin_Scale_Setup.exe",
-      "filename": "Mangyin_Scale_Setup.exe",
-      "sha256": "8507263bcd1e3332e62c7ce44d1c2ca3cb78251329693557f951186b1df85d77"
+      "filename": "Mangyin_Scale_Setup.exe"
+    },
+    "android": {
+      "productId": "weighing",
+      "platform": "android",
+      "version": "1.2.3",
+      "buildNumber": "100023",
+      "publishedAt": "2026-11-12T09:34:57+08:00",
+      "url": "https://www.pgyer.com/mangyincheng"
     }
   },
   {
@@ -17,20 +23,44 @@ window.MANGYIN_PRODUCTS = [
     "name": "芒音收银台",
     "short": "门店收银",
     "url": "https://www.pgyer.com/mangyinshouyintai",
-    "scene": "商超 · 零售 · 门店"
+    "scene": "商超 · 零售 · 门店",
+    "android": {
+      "productId": "register",
+      "platform": "android",
+      "version": "1.2.0",
+      "buildNumber": "100020",
+      "publishedAt": "2026-10-15T16:52:08+08:00",
+      "url": "https://www.pgyer.com/mangyinshouyintai"
+    }
   },
   {
     "id": "bookkeeping",
     "name": "芒音记账",
     "short": "轻松记账",
     "url": "https://www.pgyer.com/mangyinjizhang",
-    "scene": "日常收支 · 个人账本"
+    "scene": "日常收支 · 个人账本",
+    "android": {
+      "productId": "bookkeeping",
+      "platform": "android",
+      "version": "1.0.1",
+      "buildNumber": "2002",
+      "publishedAt": "2026-09-13T13:57:41+08:00",
+      "url": "https://www.pgyer.com/mangyinjizhang"
+    }
   },
   {
     "id": "mobile",
     "name": "芒音收银",
     "short": "移动经营",
     "url": "https://www.pgyer.com/sujietong",
-    "scene": "移动收款 · 门店管理"
+    "scene": "移动收款 · 门店管理",
+    "android": {
+      "productId": "mobile",
+      "platform": "android",
+      "version": "1.2.7",
+      "buildNumber": "27",
+      "publishedAt": "2026-09-13T14:10:58+08:00",
+      "url": "https://www.pgyer.com/sujietong"
+    }
   }
 ];

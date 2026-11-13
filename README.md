@@ -2,7 +2,7 @@
 
 四款产品按指定顺序展示：**称重收银 → 门店收银 → 芒音记账 → 移动经营**。
 
-纯 HTML / CSS / JavaScript，全部资源本地化，无框架、无构建步骤、无第三方 CDN。支持电脑、平板、手机；包含产品导航、扫码弹窗、应用切换、滚动动效和减少动态效果偏好。可直接双击 index.html 浏览。
+纯 HTML / CSS / JavaScript，全部资源本地化，无框架、无构建步骤、无第三方 CDN。支持电脑、平板、手机；包含产品导航、扫码弹窗、应用切换、滚动动效和减少动态效果偏好。本地预览使用下方 HTTP 服务；最新发布信息会从现有 OSS 读取。
 
 ## 视觉与响应式
 
@@ -37,11 +37,11 @@ HTTPS 使用免费的 Let's Encrypt RSA 证书，由阿里云数字证书管理�
 称重产品区域与下载中心提供独立的 Windows 下载入口；切换到其他产品时，下载中心自动隐藏 Windows 区域，避免下载错版。设备版继续使用原蒲公英二维码与链接。
 
 - 文件：Mangyin_Scale_Setup.exe
-- SHA-256：8507263bcd1e3332e62c7ce44d1c2ca3cb78251329693557f951186b1df85d77
-- 安装包通过 OSS 对象 `download/Mangyin_Scale_Setup.exe` 分发，不存入网站源码目录。
+- 版本、更新日期、SHA-256：由 OSS 的 `releases/weighing-windows.js` 提供，禁止手填源码版本代替已发布版本。
+- 安装包通过 OSS 的版本固定路径分发；`download/Mangyin_Scale_Setup.exe` 为兼容直链，不存入网站源码目录。
 - 页面不展示安装包体积；Windows 下载按钮打开确认弹窗后跳转到 OSS。
 
-更新安装包时，上传到 OSS 并同步更新 `index.html`、`products.js` 中的链接和校验值。
+更新安装包使用 `python apk.py windows`，详见 `../tool/PUBLISH_WINDOWS.md`。发布信息按产品/平台位于 `releases/*.js`，初次部署需把此目录一并上传 OSS。官网每次打开从 OSS 读取发布信息，新旧域名共用；Windows 只有发布信息校验成功才启用下载，版本、日期、SHA-256 和下载地址一同切换。四个 Android 选择按钮及下载卡片显示对应版本/日期；Android 与 Windows 分开显示。
 
 ## 下载地址
 

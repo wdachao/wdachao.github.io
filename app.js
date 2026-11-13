@@ -4,6 +4,88 @@
   const getProduct = id => products.find(product => product.id === id);
   const $ = selector => document.querySelector(selector);
   const $$ = selector => [...document.querySelectorAll(selector)];
+  const releaseRoot = 'https://mangyin-cash-weighing-2026.oss-cn-hangzhou.aliyuncs.com/';
+  let selectedProductId = 'weighing';
+  let windowsReady = false;
+  const releaseCaption = release => release
+    ? 'v' + release.version + ' · 更新 ' + release.publishedAt.slice(0, 10)
+    : '版本与更新日期以下载页为准';
+  const androidCaption = document.createElement('p');
+  androidCaption.className = 'release-caption';
+  $('.download-card-top').after(androidCaption);
+  const windowsCaption = document.createElement('p');
+  windowsCaption.className = 'release-caption windows-release-caption';
+  $('.windows-download-heading').after(windowsCaption);
+
+  function renderReleaseInfo() {
+    products.forEach(product => {
+      const button = $('[data-download="' + product.id + '"]');
+      let label = button.querySelector('.download-tab-release');
+      if (!label) {
+        const title = button.querySelector('span');
+        title.classList.add('download-tab-label');
+        label = document.createElement('small');
+        label.className = 'download-tab-release';
+        title.append(label);
+      }
+      label.textContent = releaseCaption(product.android);
+    });
+    androidCaption.textContent = 'Android ' + releaseCaption(getProduct(selectedProductId).android);
+    const windows = getProduct('weighing').windows;
+    windowsCaption.textContent = windowsReady
+      ? releaseCaption(windows) : '正在获取 Windows 发布信息…';
+    if (windowsReady) {
+      $('#windows-package-sha256').textContent = windows.sha256;
+    }
+    $('.download-integrity').hidden = !windowsReady;
+    $$('a.windows-direct').forEach(anchor => {
+      anchor.setAttribute('aria-disabled', String(!windowsReady));
+      if (windowsReady) {
+        anchor.href = windows.url;
+        anchor.download = windows.filename;
+      } else {
+        anchor.removeAttribute('href');
+      }
+    });
+  }
+
+  function validRelease(release, product, platform) {
+    if (!release || release.productId !== product.id || release.platform !== platform ||
+        !/^\d+\.\d+\.\d+$/.test(release.version) ||
+        !/^\d{4}-\d{2}-\d{2}T/.test(release.publishedAt) ||
+        Number.isNaN(Date.parse(release.publishedAt))) return false;
+    if (platform === 'android') return release.url === product.url;
+    return /^https:\/\/mangyin-cash-weighing-2026\.oss-cn-hangzhou\.aliyuncs\.com\/download\//.test(release.url) &&
+      release.filename === 'Mangyin_Scale_Setup.exe' && /^[a-f0-9]{64}$/.test(release.sha256);
+  }
+
+  function loadRelease(product, platform) {
+    const channel = product.id + '-' + platform;
+    const script = document.createElement('script');
+    script.src = releaseRoot + 'releases/' + channel + '.js?t=' + Date.now();
+    script.async = true;
+    const timeout = window.setTimeout(() => script.onerror(), 12000);
+    script.onload = () => {
+      window.clearTimeout(timeout);
+      const release = (window.MANGYIN_RELEASES || {})[channel];
+      if (validRelease(release, product, platform)) {
+        product[platform] = release;
+        if (platform === 'windows') windowsReady = true;
+        renderReleaseInfo();
+      } else if (platform === 'windows') {
+        windowsCaption.textContent = 'Windows 发布信息校验失败，请刷新重试';
+      }
+      script.remove();
+    };
+    script.onerror = () => {
+      window.clearTimeout(timeout);
+      if (platform === 'windows' && !windowsReady) {
+        windowsCaption.textContent = '暂时无法获取 Windows 版本，请刷新重试';
+      }
+      script.remove();
+    };
+    document.head.append(script);
+  }
   const menuButton = $('.menu-toggle');
   const menu = $('#mobile-menu');
 
@@ -56,6 +138,7 @@
     '<span class="windows-confirm-eyebrow">WINDOWS · 芒音称重收银</span>' +
     '<h2 id="windows-confirm-title">确认下载 Windows 安装包</h2>' +
     '<p>安装程序将从芒音称重下载到本机。</p>' +
+    '<p class="release-caption" data-windows-release></p>' +
     '<div class="windows-confirm-file"><svg class="icon" aria-hidden="true"><use href="#i-windows"></use></svg><span><strong data-windows-filename></strong><small>Windows 安装程序</small></span></div>' +
     '<div class="windows-confirm-actions"><button type="button" class="windows-confirm-cancel" data-windows-cancel>取消</button><button type="button" class="windows-confirm-submit" data-windows-confirm>确认下载</button></div>';
   document.body.append(windowsDialog);
@@ -78,9 +161,11 @@
     if (!anchor) return;
     event.preventDefault();
     event.stopImmediatePropagation();
+    if (!windowsReady) return;
     if (windowsDialog.open) return;
     pendingWindowsDownload = { url: anchor.href, filename: anchor.download || 'Mangyin_Scale_Setup.exe' };
     windowsDialog.querySelector('[data-windows-filename]').textContent = pendingWindowsDownload.filename;
+    windowsDialog.querySelector('[data-windows-release]').textContent = releaseCaption(getProduct('weighing').windows);
     if (typeof windowsDialog.showModal !== 'function') {
       window.open(pendingWindowsDownload.url, '_blank', 'noopener,noreferrer');
       pendingWindowsDownload = null;
@@ -106,6 +191,7 @@
   $$('[data-download]').forEach(button => button.addEventListener('click', () => {
     const product = getProduct(button.dataset.download);
     if (!product) return;
+    selectedProductId = product.id;
     $$('[data-download]').forEach(tab => tab.setAttribute('aria-pressed', String(tab === button)));
     $('#download-name').textContent = product.name;
     $('#download-scene').textContent = product.scene;
@@ -115,11 +201,13 @@
     $('#download-link').href = product.url;
     $('#download-link-label').textContent = '前往下载';
     $('#windows-download').hidden = !product.windows;
-    if (product.windows) {
-      $('#windows-download-link').href = product.windows.url;
-      $('#windows-package-sha256').textContent = product.windows.sha256;
-    }
+    renderReleaseInfo();
   }));
+  renderReleaseInfo();
+  products.forEach(product => {
+    loadRelease(product, 'android');
+    if (product.windows) loadRelease(product, 'windows');
+  });
 
   // These local, labelled illustrations demonstrate the product's interaction.
   $$('[data-scale]').forEach(button => button.addEventListener('click', () => {
