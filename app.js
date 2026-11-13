@@ -7,6 +7,7 @@
   const releaseRoot = 'https://mangyin-cash-weighing-2026.oss-cn-hangzhou.aliyuncs.com/';
   let selectedProductId = 'weighing';
   let windowsReady = false;
+  let windowsReleaseError = '';
   const releaseCaption = release => release
     ? 'v' + release.version + ' · 更新 ' + release.publishedAt.slice(0, 10)
     : '版本与更新日期以下载页为准';
@@ -33,7 +34,7 @@
     androidCaption.textContent = 'Android ' + releaseCaption(getProduct(selectedProductId).android);
     const windows = getProduct('weighing').windows;
     windowsCaption.textContent = windowsReady
-      ? releaseCaption(windows) : '正在获取 Windows 发布信息…';
+      ? releaseCaption(windows) : (windowsReleaseError || '正在获取 Windows 发布信息…');
     if (windowsReady) {
       $('#windows-package-sha256').textContent = windows.sha256;
     }
@@ -73,14 +74,16 @@
         if (platform === 'windows') windowsReady = true;
         renderReleaseInfo();
       } else if (platform === 'windows') {
-        windowsCaption.textContent = 'Windows 发布信息校验失败，请刷新重试';
+        windowsReleaseError = 'Windows 发布信息校验失败，请刷新重试';
+        renderReleaseInfo();
       }
       script.remove();
     };
     script.onerror = () => {
       window.clearTimeout(timeout);
       if (platform === 'windows' && !windowsReady) {
-        windowsCaption.textContent = '暂时无法获取 Windows 版本，请刷新重试';
+        windowsReleaseError = '暂时无法获取 Windows 版本，请刷新重试';
+        renderReleaseInfo();
       }
       script.remove();
     };
@@ -203,6 +206,8 @@
     $('#windows-download').hidden = !product.windows;
     renderReleaseInfo();
   }));
+  // Only show versions read from the current published channel, never a stale snapshot.
+  products.forEach(product => { product.android = null; });
   renderReleaseInfo();
   products.forEach(product => {
     loadRelease(product, 'android');
