@@ -26,9 +26,9 @@ OSS 静态网站默认首页为 `index.html`。将本站的 `index.html`、`app.
 
 HTTPS 使用免费的 Let's Encrypt RSA 证书，由阿里云数字证书管理服务托管并部署至 OSS 的两个域名。当前证书有效期至 **2027-02-10**，首次采用手动 HTTP 校验，**未配置自动续期**；请在到期前重新签发并更新阿里云及 OSS 证书。证书及私钥保存在本机 `/Users/zhoubing/.codex/mydcep-ssl/config/`，不得提交 Git 或上传至公开 Bucket。
 
-## 保留旧 GitHub Pages 站点
+## GitHub Pages 站点
 
-旧官网 `https://awnin.top/` 由 `wdachao/wdachao.github.io` 仓库的 `main` 分支根目录发布，并继续保留。GitHub 同时用于网站源码版本管理。提交网站文件时保留远端根目录中的 `CNAME`（值为 `awnin.top`）和域名验证文件，不要将它改成新域名。OSS 发布与 GitHub Pages 发布是两次独立操作，更新公共页面时需同步发布。
+本站通过 `wdachao/wdachao.github.io` 仓库的 `main` 分支根目录发布，地址为 `https://wdachao.github.io/`。使用 GitHub 默认域名，不设置自定义域名或添加 `CNAME` 文件。账号主页的自定义域名会被未单独设置域名的项目站点继承。GitHub 同时用于网站源码版本管理；OSS 发布与 GitHub Pages 发布是两次独立操作，更新公共页面时需同步发布。
 
 资源使用相对路径，安装包由 OSS 提供，不放入 GitHub 仓库。
 
