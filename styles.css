@@ -36,16 +36,17 @@ img { max-width: 100%; object-fit: contain; }
 .brand strong { font-size: 26px; font-weight: 750; letter-spacing: 3px; line-height: 1.1; }
 .brand strong>span { display: block; margin-top: 8px; font-size: 8px; letter-spacing: 3.3px; color: #7d8ba2; }
 .desktop-nav { display: flex; align-items: center; gap: 38px; margin-inline: auto; }
-.desktop-nav a { position: relative; padding: 17px 0; font-size: 15px; font-weight: 550; color: #5e6c82; transition: color .2s; }
-.desktop-nav a:hover,.desktop-nav a[aria-current] { color: var(--orange); }
-.desktop-nav a:after { content: ''; position: absolute; left: 0; right: 0; bottom: 8px; height: 3px; background: var(--orange); transform: scaleX(0); transition: transform .2s; border-radius: 3px; }
-.desktop-nav a:hover:after,.desktop-nav a[aria-current]:after { transform: scaleX(1); }
+.desktop-nav button { border: 0; background: none; position: relative; padding: 17px 0; font-size: 15px; font-weight: 550; color: #5e6c82; transition: color .2s; }
+.desktop-nav button:hover,.desktop-nav button[aria-pressed=true] { color: var(--orange); }
+.desktop-nav button:after { content: ''; position: absolute; left: 0; right: 0; bottom: 8px; height: 3px; background: var(--orange); transform: scaleX(0); transition: transform .2s; border-radius: 3px; }
+.desktop-nav button:hover:after,.desktop-nav button[aria-pressed=true]:after { transform: scaleX(1); }
 .header-download { display: flex; align-items: center; justify-content: center; gap: 20px; min-height: 46px; padding: 10px 22px; background: var(--orange); color: white; border-radius: 10px; font-size: 14px; font-weight: 600; box-shadow: 0 6px 16px #ff6b241b; transition: background .2s,transform .2s; }
 .header-download:hover { background: #ef5815; transform: translateY(-1px); }
 .header-download .icon { width: 18px; height: 18px; }
 .menu-toggle { display: none; border: 0; background: #f0f4fa; border-radius: 10px; min-width: 44px; min-height: 44px; padding: 10px; }
 .mobile-menu { position: absolute; left: 0; right: 0; padding: 16px 32px 24px; background: white; border-bottom: 1px solid var(--line); box-shadow: 0 16px 24px #15233d0a; }
-.mobile-menu a { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; font-size: 16px; border-bottom: 1px solid #eff2f7; }
+.mobile-menu button { width: 100%; text-align: left; border: 0; background: none; display: flex; align-items: center; justify-content: space-between; padding: 15px 0; font-size: 16px; border-bottom: 1px solid #eff2f7; }
+.mobile-menu button[aria-pressed=true] { color: var(--orange); }
 .mobile-menu[hidden] { display: none; }
 
 /* A large, open hero with warm retail orange and cool business blue. */
@@ -302,7 +303,7 @@ body.modal-open { overflow: hidden; }
   .wrap { width: calc(100% - 80px); }
   .header-inner { gap: 24px; }
   .desktop-nav { gap: 24px; }
-  .desktop-nav a { font-size: 14px; }
+  .desktop-nav button { font-size: 14px; }
   .brand strong { font-size: 24px; }
   .header-download { padding-inline: 18px; gap: 14px; }
   .hero-inner { min-height: 665px; padding-block: 67px; }

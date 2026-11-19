@@ -28,7 +28,7 @@ HTTPS 使用免费的 Let's Encrypt RSA 证书，由阿里云数字证书管理�
 
 ## GitHub Pages 站点
 
-本站通过 `wdachao/wdachao.github.io` 仓库的 `main` 分支根目录发布，地址为 `https://wdachao.github.io/`。使用 GitHub 默认域名，不设置自定义域名或添加 `CNAME` 文件。账号主页的自定义域名会被未单独设置域名的项目站点继承。GitHub 同时用于网站源码版本管理；OSS 发布与 GitHub Pages 发布是两次独立操作，更新公共页面时需同步发布。
+`wdachao/wdachao.github.io` 仓库的 `main` 分支根目录发布到 `https://wdachao.github.io/`，使用 GitHub 默认域名，不添加 `CNAME` 文件。保留远端域名验证文件。GitHub 同时用于网站源码版本管理；OSS 发布与 GitHub Pages 发布是两次独立操作，更新公共页面时需同步发布。
 
 资源使用相对路径，安装包由 OSS 提供，不放入 GitHub 仓库。
 
@@ -42,6 +42,14 @@ HTTPS 使用免费的 Let's Encrypt RSA 证书，由阿里云数字证书管理�
 - 页面不展示安装包体积；Windows 下载按钮打开确认弹窗后跳转到 OSS。
 
 更新安装包使用 `python apk.py windows`，详见 `../tool/PUBLISH_WINDOWS.md`。发布信息按产品/平台位于 `releases/*.js`，初次部署需把此目录一并上传 OSS。官网每次打开从 OSS 读取发布信息，新旧域名共用；Windows 只有发布信息校验成功才启用下载，版本、日期、SHA-256 和下载地址一同切换。四个 Android 选择按钮及下载卡片显示对应版本/日期；Android 与 Windows 分开显示。
+
+## Android 版本自动同步
+
+公开网站仓库使用 `.github/workflows/sync-android-releases.yml`，约每 10 分钟运行 `tool/sync_android_releases.py`，通过蒲公英官方 API 查询四款 Android 应用。校验包名、平台、版本和发布时间后，仅在内容变化时更新现有 OSS 的 `releases/*-android.js`；查询失败保留该应用上一次成功的发布信息。网页不内置 API Key 或写死的 Android 版本。
+
+GitHub Actions 的 Repository Secrets 需要配置 `PGYER_API_KEY`、`OSS_ACCESS_KEY_ID`、`OSS_ACCESS_KEY_SECRET`。凭证使用现有专用 OSS 发布账号，不上传凭证文件或 `apk.py` 到公开仓库。公共仓库的标准托管运行器免费，OSS 仍按原有存储和请求计费，无需 FC。GitHub 定时调度可能延迟；公开仓库连续 60 天无活动时可能自动停用定时任务，可在 Actions 中重新启用并手动运行。
+
+源码仓库也保留同一工作流，部署时只在公开网站仓库启用定时同步，避免重复执行。顶部四个产品按钮与下载区共用选中状态；点击只切换对应下载卡片、二维码和版本，不滚动页面。
 
 ## 下载地址
 

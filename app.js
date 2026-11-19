@@ -103,7 +103,6 @@
     menuButton.setAttribute('aria-expanded', String(open));
     menuButton.setAttribute('aria-label', open ? '收起导航' : '展开导航');
   });
-  $$('#mobile-menu a').forEach(link => link.addEventListener('click', closeMenu));
   document.addEventListener('click', event => {
     if (!event.target.closest('.site-header')) closeMenu();
   });
@@ -191,11 +190,13 @@
     download.remove();
   });
 
-  $$('[data-download]').forEach(button => button.addEventListener('click', () => {
-    const product = getProduct(button.dataset.download);
+  const productSelectors = $$('[data-download], [data-select-product]');
+  function selectProduct(id) {
+    const product = getProduct(id);
     if (!product) return;
     selectedProductId = product.id;
-    $$('[data-download]').forEach(tab => tab.setAttribute('aria-pressed', String(tab === button)));
+    productSelectors.forEach(button => button.setAttribute('aria-pressed',
+      String((button.dataset.download || button.dataset.selectProduct) === product.id)));
     $('#download-name').textContent = product.name;
     $('#download-scene').textContent = product.scene;
     $('#download-icon').src = './assets/' + product.id + '-icon.webp';
@@ -205,6 +206,13 @@
     $('#download-link-label').textContent = '前往下载';
     $('#windows-download').hidden = !product.windows;
     renderReleaseInfo();
+  }
+  productSelectors.forEach(button => button.addEventListener('click', () => {
+    selectProduct(button.dataset.download || button.dataset.selectProduct);
+    if (button.closest('#mobile-menu')) {
+      closeMenu();
+      menuButton.focus({ preventScroll: true });
+    }
   }));
   // Only show versions read from the current published channel, never a stale snapshot.
   products.forEach(product => { product.android = null; });
@@ -250,16 +258,6 @@
       }, { threshold: .08 });
       $$('.reveal').forEach(element => reveal.observe(element));
     }
-    const navigation = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        const link = $('.desktop-nav a[href=\"#' + entry.target.id + '\"]');
-        if (link) {
-          if (entry.isIntersecting) link.setAttribute('aria-current', 'location');
-          else link.removeAttribute('aria-current');
-        }
-      });
-    }, { rootMargin: '-20% 0px -40% 0px' });
-    $$('.product-panel').forEach(section => navigation.observe(section));
   }
   $('#year').textContent = new Date().getFullYear();
 })();
